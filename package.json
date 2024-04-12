@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build --remote",
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/db": "^0.10.3",
     "@astrojs/sitemap": "^3.1.2",
     "@astrojs/tailwind": "^5.1.0",
     "@astrojs/vercel": "^7.5.2",
