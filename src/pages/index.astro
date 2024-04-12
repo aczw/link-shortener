@@ -1,5 +1,9 @@
 ---
+import { db, Link } from "astro:db";
+
 import Layout from "@/layouts/layout.astro";
+
+const links = await db.select().from(Link);
 ---
 
 <Layout
@@ -7,6 +11,19 @@ import Layout from "@/layouts/layout.astro";
   description="Hello world"
 >
   <main class="flex min-h-screen items-center justify-center">
-    <p class="font-bold">Hello world!</p>
+    <p class="font-bold">Links:</p>
+    <ul>
+      {
+        links.map(({ short, original }) => {
+          const shortURL = `https://go.czw.sh/${short}`;
+
+          return (
+            <li>
+              <a href={shortURL}>{shortURL}</a> redirects to <a href={original}>{original}</a>
+            </li>
+          );
+        })
+      }
+    </ul>
   </main>
 </Layout>

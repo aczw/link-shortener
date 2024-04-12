@@ -10,6 +10,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/check": "^0.5.10",
     "@astrojs/db": "^0.10.3",
     "@astrojs/sitemap": "^3.1.2",
     "@astrojs/tailwind": "^5.1.0",
@@ -26,6 +27,6 @@
     "eslint-plugin-astro": "^0.34.0",
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-tailwindcss": "^0.5.10",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.5"
   }
 }

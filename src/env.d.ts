@@ -1,7 +1,9 @@
+/// <reference path="../.astro/db-types.d.ts" />
+/// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
-  // readonly <ENV_NAME>: string;
+  readonly ASTRO_STUDIO_APP_TOKEN: string;
 }
 
 interface ImportMeta {
