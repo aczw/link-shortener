@@ -1,6 +1,7 @@
 ---
 import { db, Link } from "astro:db";
 
+import { LinkForm } from "@/components/react/link-form";
 import Layout from "@/layouts/layout.astro";
 
 const links = await db.select().from(Link);
@@ -11,26 +12,6 @@ const links = await db.select().from(Link);
   description="Hello world"
 >
   <main class="flex min-h-screen flex-col items-center justify-center space-y-12">
-    <form>
-      <label>
-        Original
-        <input
-          type="url"
-          name="original"
-          class="bg-purple-100"
-        />
-      </label>
-
-      <label>
-        Include numbers
-        <input
-          type="checkbox"
-          name="numbers"
-          checked
-        />
-      </label>
-    </form>
-
     <section>
       <h2 class="font-bold">Recent links:</h2>
       <ul>
@@ -47,5 +28,7 @@ const links = await db.select().from(Link);
         }
       </ul>
     </section>
+
+    <LinkForm client:load />
   </main>
 </Layout>
