@@ -12,6 +12,8 @@ const links = await db.select().from(Link);
   description="Hello world"
 >
   <main class="flex min-h-screen flex-col items-center justify-center space-y-12">
+    <LinkForm client:load />
+
     <section>
       <h2 class="font-bold">Recent links:</h2>
       <ul>
@@ -28,7 +30,5 @@ const links = await db.select().from(Link);
         }
       </ul>
     </section>
-
-    <LinkForm client:load />
   </main>
 </Layout>

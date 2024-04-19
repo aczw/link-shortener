@@ -32,6 +32,7 @@ const LinkForm = () => {
         />
       </label>
       <button>Send</button>
+
       {message.length > 0 ? <p>{message}</p> : null}
     </form>
   );
