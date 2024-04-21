@@ -7,13 +7,13 @@ if (!slug) {
   return Astro.redirect("/");
 }
 
-const data = await db.select().from(Link).where(eq(Link.short, slug));
-const exist = data.length === 1;
+const query = await db.select().from(Link).where(eq(Link.short, slug));
+const exist = query.length === 1;
 
 if (!exist) {
   return Astro.redirect("/");
 }
 
 Astro.response.status = 301;
-Astro.response.headers.set("Location", data[0].original);
+Astro.response.headers.set("Location", query[0].original);
 ---

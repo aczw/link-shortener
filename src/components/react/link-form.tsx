@@ -1,8 +1,9 @@
 import { useState, type FormEvent } from "react";
 
+type Status = { type: "none" } | { type: "success" | "error"; message: string };
+
 const LinkForm = () => {
-  const [message, setMessage] = useState("");
-  const [okay, setOkay] = useState("");
+  const [status, setStatus] = useState<Status>({ type: "none" });
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -12,12 +13,12 @@ const LinkForm = () => {
       method: "POST",
       body: formData,
     });
-    const data = await response.json();
+    const message = await response.text();
 
     if (response.ok) {
-      setOkay(data.message);
+      setStatus({ type: "success", message });
     } else {
-      setMessage(data.message);
+      setStatus({ type: "error", message });
     }
   }
 
@@ -29,15 +30,20 @@ const LinkForm = () => {
       <label>
         Original
         <input
-          type="url"
+          type="text"
           name="original"
           className="bg-purple-100"
         />
       </label>
       <button>Send</button>
 
-      {message.length > 0 ? <p>{message}</p> : null}
-      {okay.length > 0 ? <a href={`https://go.czw.sh/${okay}`}>go.czw.sh/{okay}</a> : null}
+      {status.type !== "none" ? (
+        status.type === "error" ? (
+          <p>{status.message}</p>
+        ) : (
+          <a href={`https://go.czw.sh/${status.message}`}>go.czw.sh/{status.message}</a>
+        )
+      ) : null}
     </form>
   );
 };
