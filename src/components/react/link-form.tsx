@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 
 const LinkForm = () => {
   const [message, setMessage] = useState("");
+  const [okay, setOkay] = useState("");
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -13,7 +14,9 @@ const LinkForm = () => {
     });
     const data = await response.json();
 
-    if (data.message) {
+    if (response.ok) {
+      setOkay(data.message);
+    } else {
       setMessage(data.message);
     }
   }
@@ -34,6 +37,7 @@ const LinkForm = () => {
       <button>Send</button>
 
       {message.length > 0 ? <p>{message}</p> : null}
+      {okay.length > 0 ? <a href={`https://go.czw.sh/${okay}`}>go.czw.sh/{okay}</a> : null}
     </form>
   );
 };

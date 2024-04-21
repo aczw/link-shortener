@@ -8,7 +8,7 @@ const links = await db.select().from(Link);
 ---
 
 <Layout
-  title="new Astro project"
+  title="link shortener"
   description="Hello world"
 >
   <main class="flex min-h-screen flex-col items-center justify-center space-y-12">
@@ -23,7 +23,7 @@ const links = await db.select().from(Link);
 
             return (
               <li>
-                <a href={shortURL}>{shortURL}</a> redirects to <a href={original}>{original}</a>
+                <a href={shortURL}>{shortURL}</a> -&gt; <a href={original}>{original}</a>
               </li>
             );
           })
