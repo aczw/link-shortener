@@ -1,6 +1,44 @@
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 
 type Status = { type: "none" } | { type: "success" | "error"; message: string };
+
+const CopyButton = ({ value }: { value: string }) => {
+  const [timeoutId, setTimeoutId] = useState(-1);
+  const copiedRef = useRef<HTMLSpanElement>(null);
+  const copyToRef = useRef<HTMLSpanElement>(null);
+
+  function handleClick() {
+    window.clearTimeout(timeoutId);
+
+    navigator.clipboard.writeText(`go.czw.sh/${value}`);
+
+    copiedRef.current!.removeAttribute("hidden");
+    copyToRef.current!.style.opacity = "0";
+
+    const id = window.setTimeout(() => {
+      copiedRef.current!.setAttribute("hidden", "");
+      copyToRef.current!.style.opacity = "100";
+    }, 2000);
+
+    setTimeoutId(id);
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      className="relative rounded-full bg-light px-5 py-3.5 text-dark hover:bg-light/20 hover:font-semibold hover:text-light"
+    >
+      <span
+        ref={copiedRef}
+        className="absolute inset-x-0"
+        hidden
+      >
+        Copied
+      </span>
+      <span ref={copyToRef}>Copy to clipboard</span>
+    </button>
+  );
+};
 
 const LinkForm = () => {
   const [status, setStatus] = useState<Status>({ type: "none" });
@@ -23,28 +61,48 @@ const LinkForm = () => {
   }
 
   return (
-    <form
-      className="flex flex-col"
-      onSubmit={submit}
-    >
-      <label>
-        Original
-        <input
-          type="text"
-          name="original"
-          className="bg-purple-100"
-        />
-      </label>
-      <button>Send</button>
+    <section className="flex w-5/12 flex-col items-center gap-5">
+      <form
+        className="flex w-full items-end justify-center gap-2.5"
+        onSubmit={submit}
+      >
+        <label className="flex grow flex-col gap-1.5">
+          <span className="font-semibold">Original</span>
+          <input
+            name="original"
+            className="rounded-full bg-light px-5 py-3.5 text-dark placeholder-dark/80 selection:bg-dark selection:text-light"
+            placeholder="Enter a URL, e.g. https://charleszw.com/"
+          />
+        </label>
+
+        <button className="rounded-full bg-light px-5 py-3.5 text-dark hover:bg-light/20 hover:font-semibold hover:text-light">
+          Create
+        </button>
+      </form>
 
       {status.type !== "none" ? (
         status.type === "error" ? (
-          <p>{status.message}</p>
+          <p className="text-red-300">{status.message}</p>
         ) : (
-          <a href={`https://go.czw.sh/${status.message}`}>go.czw.sh/{status.message}</a>
+          <div className="flex w-full items-end justify-center gap-2.5">
+            <div className="flex grow flex-col gap-1.5">
+              <p className="font-semibold">Shortened</p>
+              <div className="rounded-full bg-light px-5 py-3.5 text-dark selection:bg-dark selection:text-light">
+                <a
+                  href={`https://go.czw.sh/${status.message}`}
+                  target="_blank"
+                  className="decoration-wavy underline-offset-2 hover:underline"
+                >
+                  go.czw.sh/{status.message}
+                </a>
+              </div>
+            </div>
+
+            <CopyButton value={status.message} />
+          </div>
         )
       ) : null}
-    </form>
+    </section>
   );
 };
 

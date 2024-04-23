@@ -77,7 +77,7 @@ const canonicalUrl = removeTrailingSlash(new URL(Astro.url.pathname, Astro.site)
     <title>{title}</title>
   </head>
 
-  <body class="bg-dark font-mono text-light">
+  <body class="bg-dark font-mono text-base text-light selection:bg-light selection:text-dark">
     <slot />
   </body>
 </html>

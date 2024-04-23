@@ -11,10 +11,18 @@ const links = await db.select().from(Link);
   title="link shortener"
   description="Hello world"
 >
-  <main class="flex min-h-screen flex-col items-center justify-center space-y-12">
-    <LinkForm client:load />
+  <main class="flex min-h-screen flex-col items-center justify-center gap-12">
+    <div>
+      <h1 class="text-4xl font-semibold">link shortener</h1><p>
+        made by <a
+          href="https://charleszw.com"
+          target="_blank"
+          class="decoration-wavy underline-offset-2 hover:underline"
+          >charles</a>
+      </p>
+    </div>
 
-    <p>&lt;= === !== != --&gt; -&gt;</p>
+    <LinkForm client:load />
 
     <section>
       <h2 class="font-bold">Recent links:</h2>
