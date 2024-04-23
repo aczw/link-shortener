@@ -74,6 +74,14 @@ const canonicalUrl = removeTrailingSlash(new URL(Astro.url.pathname, Astro.site)
       href="/favicon.ico"
     />
 
+    <link
+      rel="preload"
+      href="/_fonts/CommitMono-VariableFont.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+
     <title>{title}</title>
   </head>
 

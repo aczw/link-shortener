@@ -1,59 +1,24 @@
 ---
-import { db, Link } from "astro:db";
-
 import { LinkForm } from "@/components/react/link-form";
 import Layout from "@/layouts/layout.astro";
-
-const links = await db.select().from(Link);
 ---
 
 <Layout
   title="link shortener"
   description="Hello world"
 >
-  <main class="flex min-h-screen flex-col items-center justify-center gap-12">
+  <main class="flex min-h-screen flex-col items-center justify-center gap-20">
     <div>
-      <h1 class="text-4xl font-semibold">link shortener</h1><p>
+      <h1 class="xxs:text-4xl text-3xl font-bold sm:text-5xl md:text-6xl">link shortener</h1><p>
         made by <a
           href="https://charleszw.com"
           target="_blank"
-          class="decoration-wavy underline-offset-2 hover:underline"
+          class="decoration-wavy underline-offset-2 hover:font-bold hover:underline"
           >charles</a
         >
       </p>
     </div>
 
-    <p>TODO: Preload fonts</p>
-
     <LinkForm client:load />
-
-    <section>
-      <h2 class="font-bold">Recent links:</h2>
-      <ul>
-        {
-          links.map(({ short, original }) => {
-            const shortURL = `https://go.czw.sh/${short}`;
-
-            return (
-              <li>
-                <a
-                  href={shortURL}
-                  target="_blank"
-                >
-                  {shortURL}
-                </a>{" "}
-                -&gt;{" "}
-                <a
-                  href={original}
-                  target="_blank"
-                >
-                  {original}
-                </a>
-              </li>
-            );
-          })
-        }
-      </ul>
-    </section>
   </main>
 </Layout>

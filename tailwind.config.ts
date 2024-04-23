@@ -22,6 +22,10 @@ const config = {
         light: "#d1f2c8",
         dark: "#176b98",
       },
+      screens: {
+        xxs: "475px",
+        xs: "575px",
+      },
     },
   },
   plugins: [],

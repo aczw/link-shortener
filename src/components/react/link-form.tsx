@@ -26,7 +26,7 @@ const CopyButton = ({ value }: { value: string }) => {
   return (
     <button
       onClick={handleClick}
-      className="relative rounded-full bg-light px-5 py-3.5 text-dark hover:bg-light/20 hover:font-semibold hover:text-light"
+      className="relative rounded-full bg-light/80 px-5 py-3.5 text-dark hover:bg-light/20 hover:font-bold hover:text-light"
     >
       <span
         ref={copiedRef}
@@ -35,7 +35,12 @@ const CopyButton = ({ value }: { value: string }) => {
       >
         Copied
       </span>
-      <span ref={copyToRef}>Copy to clipboard</span>
+      <span
+        ref={copyToRef}
+        className="font-semibold"
+      >
+        Copy to clipboard
+      </span>
     </button>
   );
 };
@@ -61,9 +66,9 @@ const LinkForm = () => {
   }
 
   return (
-    <section className="flex w-5/12 flex-col items-center gap-5">
+    <section className="xs:w-3/4 flex w-5/6 flex-col items-center gap-5 lg:w-2/3 xl:w-7/12">
       <form
-        className="flex w-full items-end justify-center gap-2.5"
+        className="xs:flex-row xs:items-end flex w-full flex-col justify-center gap-2.5"
         onSubmit={submit}
       >
         <label className="flex grow flex-col gap-1.5">
@@ -75,7 +80,7 @@ const LinkForm = () => {
           />
         </label>
 
-        <button className="rounded-full bg-light px-5 py-3.5 text-dark hover:bg-light/20 hover:font-semibold hover:text-light">
+        <button className="rounded-full bg-light/80 px-5 py-3.5 font-semibold text-dark hover:bg-light/20 hover:font-bold hover:text-light">
           Create
         </button>
       </form>
@@ -84,7 +89,7 @@ const LinkForm = () => {
         status.type === "error" ? (
           <p className="text-red-300">{status.message}</p>
         ) : (
-          <div className="flex w-full items-end justify-center gap-2.5">
+          <div className="xs:flex-row xs:items-end flex w-full flex-col justify-center gap-2.5">
             <div className="flex grow flex-col gap-1.5">
               <p className="font-semibold">Shortened</p>
               <div className="rounded-full bg-light px-5 py-3.5 text-dark selection:bg-dark selection:text-light">

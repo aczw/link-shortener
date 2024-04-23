@@ -9,7 +9,9 @@ export const POST: APIRoute = async ({ request }) => {
 
   const result = z.string().url().safeParse(original);
   if (!result.success) {
-    return new Response("Enter a valid URL!", { status: 400 });
+    return new Response('Invalid URL! Make sure the "https://" part is included as well.', {
+      status: 400,
+    });
   }
 
   const nanoid = customAlphabet(
