@@ -14,6 +14,8 @@ const links = await db.select().from(Link);
   <main class="flex min-h-screen flex-col items-center justify-center space-y-12">
     <LinkForm client:load />
 
+    <p>&lt;= === !== != --&gt; -&gt;</p>
+
     <section>
       <h2 class="font-bold">Recent links:</h2>
       <ul>
@@ -23,7 +25,19 @@ const links = await db.select().from(Link);
 
             return (
               <li>
-                <a href={shortURL}>{shortURL}</a> -&gt; <a href={original}>{original}</a>
+                <a
+                  href={shortURL}
+                  target="_blank"
+                >
+                  {shortURL}
+                </a>{" "}
+                -&gt;{" "}
+                <a
+                  href={original}
+                  target="_blank"
+                >
+                  {original}
+                </a>
               </li>
             );
           })

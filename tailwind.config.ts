@@ -9,9 +9,20 @@ const config = {
   theme: {
     fontFamily: {
       sans: [...defaultTheme.fontFamily.sans],
-      mono: [...defaultTheme.fontFamily.mono],
+      mono: [
+        ["Commit Mono Variable", ...defaultTheme.fontFamily.mono],
+        {
+          fontFeatureSettings:
+            '"ss01", "ss02", "ss03", "ss04", "ss05", "cv01", "cv02", "cv06", "cv10", "cv11"',
+        },
+      ],
     },
-    extend: {},
+    extend: {
+      colors: {
+        light: "#d1f2c8",
+        dark: "#176b98",
+      },
+    },
   },
   plugins: [],
 } satisfies Config;
