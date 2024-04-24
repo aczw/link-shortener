@@ -26,18 +26,19 @@ const CopyButton = ({ value }: { value: string }) => {
   return (
     <button
       onClick={handleClick}
+      type="submit"
       className="relative rounded-full bg-light/80 px-5 py-3.5 text-dark hover:bg-light/20 hover:font-bold hover:text-light"
     >
       <span
         ref={copiedRef}
-        className="absolute inset-x-0"
+        className="absolute inset-x-0 selection:bg-dark selection:text-light"
         hidden
       >
         Copied
       </span>
       <span
         ref={copyToRef}
-        className="font-semibold"
+        className="font-semibold selection:bg-dark selection:text-light"
       >
         Copy to clipboard
       </span>
@@ -58,11 +59,11 @@ const StatusComponent = ({ status }: { status: Status }) => {
         <div className="flex w-full flex-col justify-center gap-2.5 xs:flex-row xs:items-end">
           <div className="flex grow flex-col gap-1.5">
             <p className="font-semibold">Shortened</p>
-            <div className="rounded-full bg-light px-5 py-3.5 text-dark selection:bg-dark selection:text-light">
+            <div className="rounded-full bg-light px-5 py-3.5 text-dark">
               <a
                 href={`https://go.czw.sh/${status.message}`}
                 target="_blank"
-                className="decoration-wavy underline-offset-2 hover:font-bold hover:italic hover:underline"
+                className="decoration-wavy underline-offset-2 selection:bg-dark selection:text-light hover:font-bold hover:italic hover:underline"
               >
                 go.czw.sh/{status.message}
               </a>
@@ -112,7 +113,7 @@ const LinkForm = () => {
           />
         </label>
 
-        <button className="rounded-full bg-light/80 px-5 py-3.5 font-semibold text-dark hover:bg-light/20 hover:font-bold hover:text-light">
+        <button className="rounded-full bg-light/80 px-5 py-3.5 font-semibold text-dark selection:bg-dark selection:text-light hover:bg-light/20 hover:font-bold hover:text-light">
           Create
         </button>
       </form>

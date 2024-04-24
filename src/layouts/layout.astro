@@ -47,6 +47,27 @@ const canonicalUrl = removeTrailingSlash(new URL(Astro.url.pathname, Astro.site)
       property="og:url"
       content={canonicalUrl}
     />
+    <meta
+      property="og:image"
+      content="/og.png"
+    />
+
+    <meta
+      property="twitter:image"
+      content="/og.png"
+    />
+    <meta
+      property="twitter:card"
+      content="summary"
+    />
+    <meta
+      property="twitter:title"
+      content={title}
+    />
+    <meta
+      property="twitter:description"
+      content={description}
+    />
 
     <link
       rel="canonical"
