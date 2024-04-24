@@ -31,7 +31,7 @@ const CopyButton = ({ value }: { value: string }) => {
     >
       <span
         ref={copiedRef}
-        className=" font-semibold selection:bg-dark selection:text-light"
+        className="absolute inset-x-0 font-semibold selection:bg-dark selection:text-light"
         hidden
       >
         Copied
