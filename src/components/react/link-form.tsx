@@ -1,6 +1,6 @@
 import { useRef, useState, type FormEvent } from "react";
 
-type Status = { type: "none" } | { type: "success" | "error"; message: string };
+type Status = { type: "none" | "progress" } | { type: "success" | "error"; message: string };
 
 const CopyButton = ({ value }: { value: string }) => {
   const [timeoutId, setTimeoutId] = useState(-1);
@@ -45,11 +45,43 @@ const CopyButton = ({ value }: { value: string }) => {
   );
 };
 
+const StatusComponent = ({ status }: { status: Status }) => {
+  switch (status.type) {
+    case "none":
+      return null;
+    case "error":
+      return <p className="text-red-300">{status.message}</p>;
+    case "progress":
+      return <p>Generating...</p>;
+    case "success":
+      return (
+        <div className="flex w-full flex-col justify-center gap-2.5 xs:flex-row xs:items-end">
+          <div className="flex grow flex-col gap-1.5">
+            <p className="font-semibold">Shortened</p>
+            <div className="rounded-full bg-light px-5 py-3.5 text-dark selection:bg-dark selection:text-light">
+              <a
+                href={`https://go.czw.sh/${status.message}`}
+                target="_blank"
+                className="decoration-wavy underline-offset-2 hover:font-bold hover:italic hover:underline"
+              >
+                go.czw.sh/{status.message}
+              </a>
+            </div>
+          </div>
+
+          <CopyButton value={status.message} />
+        </div>
+      );
+  }
+};
+
 const LinkForm = () => {
   const [status, setStatus] = useState<Status>({ type: "none" });
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    setStatus({ type: "progress" });
 
     const formData = new FormData(e.target as HTMLFormElement);
     const response = await fetch("/api/create", {
@@ -66,9 +98,9 @@ const LinkForm = () => {
   }
 
   return (
-    <section className="xs:w-3/4 flex w-5/6 flex-col items-center gap-5 lg:w-2/3 xl:w-7/12">
+    <section className="flex w-5/6 flex-col items-center gap-5 xs:w-3/4 lg:w-2/3 xl:w-7/12">
       <form
-        className="xs:flex-row xs:items-end flex w-full flex-col justify-center gap-2.5"
+        className="flex w-full flex-col justify-center gap-2.5 xs:flex-row xs:items-end"
         onSubmit={submit}
       >
         <label className="flex grow flex-col gap-1.5">
@@ -85,28 +117,7 @@ const LinkForm = () => {
         </button>
       </form>
 
-      {status.type !== "none" ? (
-        status.type === "error" ? (
-          <p className="text-red-300">{status.message}</p>
-        ) : (
-          <div className="xs:flex-row xs:items-end flex w-full flex-col justify-center gap-2.5">
-            <div className="flex grow flex-col gap-1.5">
-              <p className="font-semibold">Shortened</p>
-              <div className="rounded-full bg-light px-5 py-3.5 text-dark selection:bg-dark selection:text-light">
-                <a
-                  href={`https://go.czw.sh/${status.message}`}
-                  target="_blank"
-                  className="decoration-wavy underline-offset-2 hover:underline"
-                >
-                  go.czw.sh/{status.message}
-                </a>
-              </div>
-            </div>
-
-            <CopyButton value={status.message} />
-          </div>
-        )
-      ) : null}
+      <StatusComponent status={status} />
     </section>
   );
 };

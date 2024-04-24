@@ -4,19 +4,28 @@ import Layout from "@/layouts/layout.astro";
 ---
 
 <Layout
-  title="link shortener"
-  description="Hello world"
+  title="Link Shortener"
+  description="Takes your links and shortens them."
 >
   <main class="flex min-h-screen flex-col items-center justify-center gap-20">
     <div>
-      <h1 class="xxs:text-4xl text-3xl font-bold sm:text-5xl md:text-6xl">link shortener</h1><p>
-        made by <a
-          href="https://charleszw.com"
+      <h1 class="text-3xl font-bold xxs:text-4xl sm:text-5xl md:text-6xl">Link Shortener</h1>
+      <div class="flex justify-between">
+        <p>
+          made by <a
+            href="https://charleszw.com"
+            target="_blank"
+            class="decoration-wavy underline-offset-2 hover:font-bold hover:italic hover:underline"
+            >Charles</a
+          >
+        </p>
+        <a
+          href="https://github.com/aczw/link-shortener"
           target="_blank"
-          class="decoration-wavy underline-offset-2 hover:font-bold hover:underline"
-          >charles</a
+          class="decoration-wavy underline-offset-2 hover:font-bold hover:italic hover:underline"
+          >source</a
         >
-      </p>
+      </div>
     </div>
 
     <LinkForm client:load />
