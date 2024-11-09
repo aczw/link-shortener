@@ -3,7 +3,8 @@
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
-  readonly ASTRO_STUDIO_APP_TOKEN: string;
+  readonly ASTRO_DB_REMOTE_URL: string;
+  readonly ASTRO_DB_APP_TOKEN: string;
 }
 
 interface ImportMeta {
